@@ -8,13 +8,15 @@ type Props = {
   url: string;
   setVideoData: any;
   setUrl: any;
+  isWide: boolean;
+  setIsWide: any;
 };
 
 type SubProps = {
   data: ytdl.relatedVideo;
 };
 
-const Related: React.FC<Props> = ({ url, setVideoData, setUrl }) => {
+const Related: React.FC<Props> = ({ url, setVideoData, setUrl, isWide }) => {
   const [related, setRelated] = useState<ytdl.relatedVideo[] | null>(null);
 
   useEffect(() => {

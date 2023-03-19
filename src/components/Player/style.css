@@ -7,6 +7,12 @@
   width: 1000px;
 }
 
+.video-width-wide {
+  width: 80%;
+  background-color: #000;
+  margin-inline: auto;
+}
+
 .content-wrapper {
   position: relative;
 }

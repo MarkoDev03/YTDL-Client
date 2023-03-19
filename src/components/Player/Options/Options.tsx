@@ -4,7 +4,7 @@ import { IoPlay } from "react-icons/io5";
 import { formatVideoDuration } from "../../../utils/time-formatter";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { AiFillSetting } from "react-icons/ai";
-import { MdFullscreen } from "react-icons/md";
+import { MdFullscreen, MdOutlineRectangle } from "react-icons/md";
 import { VideoDetails } from "../../../models/video-details";
 import Setttings from "./Setttings";
 
@@ -17,6 +17,10 @@ type Props = {
   currentTime: number;
   qualityLevel: string;
   setQualityLevel: any;
+  setPlaybackSpeed: any;
+  playbackSpeed: number;
+  isWide: boolean;
+  setIsWide: any;
 };
 
 const Options: React.FC<Props> = ({
@@ -27,7 +31,11 @@ const Options: React.FC<Props> = ({
   slider,
   data,
   qualityLevel,
-  setQualityLevel
+  setQualityLevel,
+  setPlaybackSpeed,
+  playbackSpeed,
+  isWide,
+  setIsWide,
 }) => {
   const [isPaused, setIsPaused] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(false);
@@ -117,6 +125,13 @@ const Options: React.FC<Props> = ({
             style={{ cursor: "pointer" }}
             onClick={() => setIsSettingsOpen(!isSettingsOpen)}
           />
+          <MdOutlineRectangle
+            color="#ffff"
+            size={35}
+            className="ml-4"
+            style={{ cursor: "pointer" }}
+            onClick={() => setIsWide(!isWide)}
+          />
           <MdFullscreen
             color="#ffff"
             size={35}
@@ -132,6 +147,10 @@ const Options: React.FC<Props> = ({
           setIsQualityOpen={setIsQualityOpen}
           setQualityLevel={setQualityLevel}
           qualityLevel={qualityLevel}
+          setPlaybackSpeed={setPlaybackSpeed}
+          playbackSpeed={playbackSpeed}
+          isWide={isWide}
+          setIsWide={setIsWide}
         />
       )}
     </div>

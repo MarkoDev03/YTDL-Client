@@ -6,10 +6,13 @@ import Options from "./Options/Options";
 
 type Props = {
   data: VideoDetails;
+  isWide: boolean;
+  setIsWide: any;
 };
 
-const Player: React.FC<Props> = ({ data }) => {
+const Player: React.FC<Props> = ({ data, isWide, setIsWide }) => {
   const [currentTime, setCurrentTime] = useState<number>(0);
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
 
   const audioRef = useRef<HTMLVideoElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -25,7 +28,9 @@ const Player: React.FC<Props> = ({ data }) => {
 
   const [qualityLevel, setQualityLevel] = useState<string>(quality[0]);
 
-  const videoSrc = data.formats.find((x) => x.qualityLabel === qualityLevel) as Format;
+  const videoSrc = data.formats.find(
+    (x) => x.qualityLabel === qualityLevel
+  ) as Format;
 
   useEffect(() => {
     videoRef.current?.addEventListener("playing", () => {
@@ -48,18 +53,26 @@ const Player: React.FC<Props> = ({ data }) => {
       audioRef.current!.currentTime = Number(value);
       videoRef.current!.currentTime = Number(value);
     });
-  }, [audioRef, videoRef, slider]);
+  }, [slider]);
 
   useEffect(() => {
     if (audioRef.current !== null && videoRef.current !== null) {
       audioRef.current.currentTime = Number(currentTime);
       videoRef.current.currentTime = Number(currentTime);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [qualityLevel, audioRef, videoRef]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [qualityLevel]);
+
+  useEffect(() => {
+    if (audioRef.current !== null && videoRef.current !== null) {
+      audioRef.current.playbackRate = playbackSpeed;
+      videoRef.current.playbackRate = playbackSpeed;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playbackSpeed]);
 
   return (
-    <div className="flex justify-center items-center video-width rounded-md player-wrapper">
+    <div className={`flex justify-center items-center ${isWide ? "video-width-wide" : "video-width"} rounded-md player-wrapper`}>
       <div className="content-wrapper">
         <video
           src={videoSrc?.url}
@@ -67,7 +80,7 @@ const Player: React.FC<Props> = ({ data }) => {
           autoPlay={true}
           muted={true}
           ref={videoRef}
-          className="video-player-options-show"
+          className={`video-player-options-show ${isWide ? "video-width-wide" : "video-width"}`}
         ></video>
       </div>
       <Options
@@ -79,6 +92,10 @@ const Player: React.FC<Props> = ({ data }) => {
         currentTime={currentTime}
         setQualityLevel={setQualityLevel}
         qualityLevel={qualityLevel}
+        setPlaybackSpeed={setPlaybackSpeed}
+        playbackSpeed={playbackSpeed}
+        isWide={isWide} 
+        setIsWide={setIsWide}
       />
       <audio src={audioSrc.url} autoPlay={true} ref={audioRef}></audio>
     </div>

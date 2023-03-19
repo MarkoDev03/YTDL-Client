@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { VideoDetails } from "../../models/video-details";
 import { MdVerified } from "react-icons/md";
 import "./style.css";
@@ -17,7 +17,7 @@ type Props = {
 export const Video: React.FC<Props> = ({ data, setVideoData, url, setUrl }) => {
   const thumbnails = data.author.thumbnails;
 
-
+  const [isWide, setIsWide] = useState<boolean>(false);
 
   const authorThumbnails: any =
     thumbnails !== undefined ? thumbnails[thumbnails.length - 1] : null;
@@ -28,13 +28,13 @@ export const Video: React.FC<Props> = ({ data, setVideoData, url, setUrl }) => {
   });
 
   return (
-    <div className="w-[100%] flex justify-center items-start py-[10px]">
-      <div className="flex justify-center items-center flex-col mr-[30px] video-data">
-        <article className="flex justify-start items-start flex-col">
-          <Player data={data} />
-          <div className="flex justify-start items-start flex-col mt-[10px]">
+    <div className="w-[100%] flex justify-center items-start py-[10px]" style={isWide ? {flexDirection: "column", alignItems: "center"} : {}}>
+      <div className="flex justify-center items-center flex-col mr-[30px] video-data" style={isWide ? { position: "relative" } : {}}>
+        <article className="flex justify-start items-start flex-col"  style={isWide ? { alignItems: "center"}: {}} >
+          <Player data={data} isWide={isWide} setIsWide={setIsWide} />
+          <div className="flex justify-start items-start flex-col mt-[10px]" style={isWide ? {width: "80%"}: {}} >
             <h1 className="text-lg font-bold video-width">{data.title}</h1>
-            <div className="flex justify-between items-center video-width">
+            <div className="flex justify-between items-center video-width" style={isWide ? {width: "100%"}: {}}>
               <div className="flex justify-center items-center">
                 <b>{formatter.format(Number(data?.views) ?? 0)} views</b>{" "}
                 <span className="ml-3">
@@ -84,7 +84,9 @@ export const Video: React.FC<Props> = ({ data, setVideoData, url, setUrl }) => {
           </div>
         </article>
       </div>
-      <Related setUrl={setUrl} setVideoData={setVideoData} url={url} />
+     {isWide ? (
+       <div className="w-[80%] flex justify-end items-end"> <Related isWide={isWide} setIsWide={setIsWide} setUrl={setUrl} setVideoData={setVideoData} url={url} /></div>
+     ) :  <Related isWide={isWide} setIsWide={setIsWide} setUrl={setUrl} setVideoData={setVideoData} url={url} />}
     </div>
   );
 };
