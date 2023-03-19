@@ -1,0 +1,30 @@
+.truncate-headline {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+}
+
+.related-video {
+  padding: 10px;
+  cursor: pointer;
+  width: 400px;
+}
+
+.related-video:hover {
+  transition: 285ms ease-in-out;
+  background-color: #242424;
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 1500px) {
+  .related-video {
+    width: 350px;
+  }
+
+  .related-img {
+    width: 140px;
+    height: 80px;
+  }
+}

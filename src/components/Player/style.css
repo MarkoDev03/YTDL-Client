@@ -1,0 +1,116 @@
+.video-data {
+  position: sticky;
+  top: 10px;
+}
+
+.video-width {
+  width: 1000px;
+}
+
+.content-wrapper {
+  position: relative;
+}
+
+#range {
+  transition: 285ms ease-in-out;
+  border-radius: 0px;
+}
+
+input[type="range"] {
+  cursor: pointer;
+  height: 4px;
+  accent-color: #f00;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.player-wrapper {
+  position: relative;
+  background-color: #000;
+  min-height: 500px;
+}
+
+.video-options {
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  opacity: 0;
+  transition: 285ms ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.content-wrapper:hover + .video-options {
+  opacity: 1;
+  transition: 285ms ease-in-out;
+}
+
+.video-options:hover {
+  transition: 285ms ease-in-out;
+  opacity: 1;
+}
+
+@keyframes showDiv {
+   from {
+    opacity: 0;
+   }
+   to {
+    opacity: 1;
+   }
+}
+
+.settings {
+  position: absolute;
+  bottom: 60px;
+  right: 10px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.8);
+  animation: showDiv 285ms ease-in-out;
+}
+
+.setting:hover {
+  transition: 285ms ease-in-out;
+  background-color: #1b1b1b;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.quality {
+  max-width: 300px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.quality > .setting {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  padding-block: 5px;
+}
+
+.back {
+  border-bottom: 1px solid white;
+  padding-left: 0px;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+
+.active-quality {
+  background-color: #1b1b1b;
+}
+
+@media only screen and (max-width: 1500px) {
+  .video-width {
+    width: 800px;
+  }
+}

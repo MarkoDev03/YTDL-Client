@@ -1,0 +1,23 @@
+body {
+  font-family: "Public Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: #0f0f0f;
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #242424;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #adadad;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: eff2f5#eee;
+}
